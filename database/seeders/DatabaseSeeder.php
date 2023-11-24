@@ -3,7 +3,10 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\User;
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class DatabaseSeeder extends Seeder
 {
@@ -12,11 +15,39 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
+        {
+            $presidentRole = Role::create(['name' => 'president']);
+            $managerRole = Role::create(['name' => 'manager']);
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+            $sendOffers = Permission::create(['name' => 'send-offers']);
+            $receiveOffers = Permission::create(['name' => 'receive-offers']);
+
+            $presidentRole->syncPermissions([$sendOffers]);
+            $managerRole->syncPermissions([$receiveOffers]);
+
+            $presidentUser = User::where('email', 'president@example.com')->first();
+
+            if (!$presidentUser) {
+                $presidentUser = User::create([
+                    'name' => 'PresidentUser',
+                    'email' => 'president@example.com',
+                    'password' => bcrypt('password'),
+                ]);
+            }
+
+            $presidentUser->assignRole('president');
+
+            $managerUser = User::where('email', 'manager@example.com')->first();
+
+            if (!$managerUser) {
+                $managerUser = User::create([
+                    'name' => 'ManagerUser',
+                    'email' => 'manager@example.com',
+                    'password' => bcrypt('password'),
+                ]);
+            }
+
+            $managerUser->assignRole('manager');
+        }
     }
 }
