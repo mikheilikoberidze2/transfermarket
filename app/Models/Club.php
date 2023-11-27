@@ -9,7 +9,7 @@ class Club extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name'];
+    protected $fillable = ['name','manager_id'];
 
     public function footballers()
     {
@@ -18,13 +18,13 @@ class Club extends Model
 
     public function manager()
     {
-        return $this->hasOne(User::class,'manager_id')->whereHas('roles', function ($query) {
+        return $this->BelongsTo(User::class,'manager_id')->whereHas('roles', function ($query) {
             $query->where('name', 'manager');
         });
     }
     public function president()
     {
-        return $this->hasOne(User::class,'president_id')->whereHas('roles', function ($query) {
+        return $this->BelongsTo(User::class,'president_id')->whereHas('roles', function ($query) {
             $query->where('name', 'president');
         });
     }

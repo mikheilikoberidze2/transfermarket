@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('clubs', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->unsignedBigInteger('manager_id')->unique();
-            $table->unsignedBigInteger('president_id')->unique();
+            $table->foreignId('manager_id')->unique();
+            $table->foreignId('president_id')->unique();
             $table->timestamps();
 
         });

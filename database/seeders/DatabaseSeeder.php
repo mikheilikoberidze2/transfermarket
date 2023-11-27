@@ -16,6 +16,16 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         {
+            $superadmin = User::create([
+                'name' => 'Admin',
+                'email' => 'admin@example.com',
+                'password' => bcrypt('password'),
+            ]);
+            Role::create(['name' => 'Super Admin']);
+            $superadmin->assignRole('Super Admin');
+
+
+
             $presidentRole = Role::create(['name' => 'president']);
             $managerRole = Role::create(['name' => 'manager']);
 
