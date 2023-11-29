@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('lastname');
             $table->foreignId('club_id');
-            $table->foreignId('national_team_id');
+            $table->foreignId('national_id');
             $table->timestamps();
         });
     }
