@@ -9,16 +9,16 @@ class Footballer extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'lastname', 'club_id', 'national_team_id', 'user_id'];
+    protected $fillable = ['name', 'lastname', 'club_id', 'national_id'];
 
     public function club()
     {
         return $this->belongsTo(Club::class);
     }
 
-    public function nationalTeam()
+    public function national()
     {
-        return $this->belongsTo(NationalTeam::class);
+        return $this->belongsTo(National::class);
     }
 
 }

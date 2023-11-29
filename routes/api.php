@@ -3,6 +3,8 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClubController;
+use App\Http\Controllers\FootballerController;
+use App\Http\Controllers\NationalController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -23,7 +25,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::apiResource('users', AdminController::class);
     Route::apiResource('clubs', ClubController::class);
-
+    Route::apiResource('nationals',NationalController::class);
+    Route::apiResource('footballers',FootballerController::class);
 });
 
 Route::post('/login', [AuthController::class, 'login']);

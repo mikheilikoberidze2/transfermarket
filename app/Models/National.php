@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class NationalTeam extends Model
+class National extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name'];
+    protected $fillable = ['name','manager_id'];
 
     public function footballers()
     {
@@ -18,14 +18,14 @@ class NationalTeam extends Model
 
     public function manager()
     {
-        return $this->hasOne(User::class)->whereHas('roles', function ($query) {
+        return $this->BelongsTo(User::class)->whereHas('roles', function ($query) {
             $query->where('name', 'manager');
         });
     }
 
     public function president()
     {
-        return $this->hasOne(User::class)->whereHas('roles', function ($query) {
+        return $this->BelongsTo(User::class)->whereHas('roles', function ($query) {
             $query->where('name', 'president');
         });
     }

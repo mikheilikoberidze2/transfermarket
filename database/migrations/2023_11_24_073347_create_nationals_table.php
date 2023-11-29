@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('national_teams', function (Blueprint $table) {
+        Schema::create('nationals', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->foreignId('manager_id')->unique();

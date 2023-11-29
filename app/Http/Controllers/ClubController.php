@@ -16,6 +16,10 @@ class ClubController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function __construct()
+    {
+        $this->authorizeResource(Club::class, 'club');
+    }
     public function index()
     {
         $club = Club::all();
@@ -29,9 +33,8 @@ class ClubController extends Controller
         {
             $validatedData = $request->validated();
             $president = Auth::user();
-            $president->club()->create($validatedData);
+           $president->club()->create($validatedData);
         return response()->json(['message' => 'Club created'], 201);
-
     }
 
     /**

@@ -49,9 +49,9 @@ class User extends Authenticatable
         return $this->hasOne(Club::class,'president_id');
     }
 
-    public function nationalteam()
+    public function national()
     {
-        return $this->hasOne(NationalTeam::class,'president_id');
+        return $this->hasOne(National::class,'president_id');
     }
     public function sentOffers()
     {
