@@ -44,9 +44,14 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function club()
+    public function presidentClub()
     {
-        return $this->hasOne(Club::class,'president_id');
+        return $this->hasOne(Club::class, 'president_id');
+    }
+
+    public function managerClub()
+    {
+        return $this->hasOne(Club::class, 'manager_id');
     }
 
     public function national()
@@ -61,5 +66,8 @@ class User extends Authenticatable
     public function receivedOffers()
     {
         return $this->hasMany(Offer::class, 'receiver_id');
+    }
+    public function market(){
+        return $this->hasMany(Market::class);
     }
 }

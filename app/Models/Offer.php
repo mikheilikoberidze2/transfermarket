@@ -9,7 +9,7 @@ class Offer extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['sender_id', 'receiver_id', 'offer_type', 'footballer_id'];
+    protected $fillable = ['sender_id', 'receiver_id', 'price', 'market_id'];
 
     public function sender()
     {
@@ -21,8 +21,8 @@ class Offer extends Model
         return $this->belongsTo(User::class, 'receiver_id');
     }
 
-    public function footballer()
+    public function market()
     {
-        return $this->belongsTo(Footballer::class);
+        return $this->BelongsTo(Market::class);
     }
 }

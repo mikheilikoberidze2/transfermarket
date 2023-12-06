@@ -9,7 +9,7 @@ class Club extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name','manager_id'];
+    protected $fillable = ['name','manager_id','budget'];
 
     public function footballers()
     {
@@ -27,5 +27,15 @@ class Club extends Model
         return $this->BelongsTo(User::class,'president_id')->whereHas('roles', function ($query) {
             $query->where('name', 'president');
         });
+    }
+    public function updateReceiverBudget($amount)
+    {
+        $this->budget += $amount;
+        $this->save();
+    }
+    public function updateSenderBudget($amount)
+    {
+        $this->budget -= $amount;
+        $this->save();
     }
 }

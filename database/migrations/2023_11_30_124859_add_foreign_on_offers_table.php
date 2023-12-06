@@ -11,14 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('clubs', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->foreignId('manager_id')->unique();
-            $table->foreignId('president_id')->unique();
-            $table->float('budget')->default(0);
-            $table->timestamps();
-
+        Schema::table('offers', function (Blueprint $table){
+            $table->foreignId('market_id')->constrained()->cascadeOnDelete();
         });
     }
 
@@ -27,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('clubs');
+        Schema::table('offers', function (Blueprint $table){
+            $table->dropForeign('market_id');
+        });
     }
 };
