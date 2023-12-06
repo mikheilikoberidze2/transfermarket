@@ -9,6 +9,7 @@ use App\Models\Footballer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use mysql_xdevapi\Collection;
+use function PHPUnit\Framework\matches;
 
 class FootballerController extends Controller
 {
@@ -22,9 +23,21 @@ class FootballerController extends Controller
     }
     public function store(FootballerStoreRequest $request)
     {
+        $user =  Auth::user();
         $validatedData = $request->validated();
-         Auth::user()->club->footballers()->create($validatedData);
+        $userRoles = $user->getRoleNames()->first();
+
+        match ($userRoles)
+        {
+            'president'=>$user->presidentClub->footballers()->create($validatedData),
+            'manager' => $user->managerClub->footballers()->create($validatedData),
+        };
+
         return response()->json(['message' => 'Footballer created'], 201);
+    }
+    public function show(Footballer $footballer)
+    {
+        return new FootballerResource($footballer);
     }
     public function update(FootballerUpdateRequest $request, Footballer $footballer)
     {

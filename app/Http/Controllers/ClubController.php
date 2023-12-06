@@ -33,7 +33,7 @@ class ClubController extends Controller
         {
             $validatedData = $request->validated();
             $president = Auth::user();
-           $president->club()->create($validatedData);
+           $president->presidentClub()->create($validatedData);
         return response()->json(['message' => 'Club created'], 201);
     }
 

@@ -15,8 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('sender_id');
             $table->foreignId('receiver_id');
-            $table->string('offer_type');
-            $table->foreignId('footballer_id')->constrained();
+            $table->float('price');
             $table->timestamps();
         });
     }
